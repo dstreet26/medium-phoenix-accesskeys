@@ -229,7 +229,7 @@ defmodule Accesskeys.Accounts do
 
   """
   def list_users do
-    Repo.all(User)
+    Repo.all(User) |> Repo.preload(:user_type)
   end
 
   @doc """
@@ -246,7 +246,7 @@ defmodule Accesskeys.Accounts do
       ** (Ecto.NoResultsError)
 
   """
-  def get_user!(id), do: Repo.get!(User, id)
+  def get_user!(id), do: Repo.get!(User, id) |> Repo.preload(:user_type)
 
   @doc """
   Creates a user.
@@ -260,9 +260,10 @@ defmodule Accesskeys.Accounts do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_user(attrs \\ %{}) do
+  def create_user(attrs \\ %{},user_type_id) do
     %User{}
     |> User.changeset(attrs)
+    |> Ecto.Changeset.put_change(:user_type_id, user_type_id)
     |> Repo.insert()
   end
 

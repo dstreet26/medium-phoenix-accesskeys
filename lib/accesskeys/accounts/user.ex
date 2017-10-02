@@ -27,6 +27,9 @@ defmodule Accesskeys.Accounts.User do
   end
 
   defp hashed_password(password) do
-    Comeonin.Pbkdf2.hashpwsalt(password)
+    case password do
+       nil -> ""
+       _ -> Comeonin.Pbkdf2.hashpwsalt(password)
+    end
   end
 end

@@ -10,18 +10,33 @@ defmodule AccesskeysWeb.UserController do
   end
 
   def new(conn, _params) do
+    user_types = Accounts.list_user_types()
     changeset = Accounts.change_user(%User{})
     render(conn, "new.html", changeset: changeset)
   end
 
   def create(conn, %{"user" => user_params}) do
-    case Accounts.create_user(user_params) do
-      {:ok, user} ->
+    # Get the access key from the params
+    access_key = user_params["access_key"]
+    # Check if it exists
+    database_key = Accounts.check_access_key!(access_key)
+
+    case database_key do
+      nil ->
         conn
-        |> put_flash(:info, "User created successfully.")
-        |> redirect(to: user_path(conn, :show, user))
-      {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+          |> put_flash(:error, "Access Key not found.")
+          |> redirect(to: user_path(conn, :index))
+      _ ->
+        user_type_id = database_key.user_type_id
+        case Accounts.create_user(user_params, user_type_id) do
+          {:ok, user} ->
+            Accounts.delete_access_key(database_key)
+            conn
+            |> put_flash(:info, "User created successfully.")
+            |> redirect(to: user_path(conn, :show, user))
+          {:error, %Ecto.Changeset{} = changeset} ->
+            render(conn, "new.html", changeset: changeset)
+        end
     end
   end
 

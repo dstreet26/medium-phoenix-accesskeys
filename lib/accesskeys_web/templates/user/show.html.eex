@@ -13,8 +13,8 @@
   </li>
 
   <li>
-    <strong>Encrypted password:</strong>
-    <%= @user.encrypted_password %>
+    <strong>UserType:</strong>
+    <%= @user.user_type.type %>
   </li>
 
 </ul>
