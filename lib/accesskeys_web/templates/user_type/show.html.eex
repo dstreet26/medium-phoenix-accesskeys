@@ -7,9 +7,12 @@
     <%= @user_type.type %>
   </li>
 
-  <li>
-    <strong>Actions:</strong>
-    <%= @user_type.actions %>
+  <li><strong>Actions:</strong>
+    <ul>
+    <%= for action <- @user_type.actions do %>
+      <li><%= "#{action}"  %></li>
+    <%= end %>
+    </ul>
   </li>
 
 </ul>

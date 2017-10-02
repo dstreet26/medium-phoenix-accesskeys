@@ -13,7 +13,13 @@
 <%= for user_type <- @user_types do %>
     <tr>
       <td><%= user_type.type %></td>
-      <td><%= user_type.actions %></td>
+      <td>[
+        <%= case user_type.actions do
+           nil -> ""
+           _ -> Enum.join(user_type.actions,", ")
+        end
+         %>
+      ]</td>
 
       <td class="text-right">
         <span><%= link "Show", to: user_type_path(@conn, :show, user_type), class: "btn btn-default btn-xs" %></span>
