@@ -1,0 +1,26 @@
+<h2>Listing Access keys</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Access key</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for access_key <- @access_keys do %>
+    <tr>
+      <td><%= access_key.access_key %></td>
+
+      <td class="text-right">
+        <span><%= link "Show", to: access_key_path(@conn, :show, access_key), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Edit", to: access_key_path(@conn, :edit, access_key), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Delete", to: access_key_path(@conn, :delete, access_key), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Access key", to: access_key_path(@conn, :new) %></span>

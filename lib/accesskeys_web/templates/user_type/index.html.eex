@@ -1,0 +1,28 @@
+<h2>Listing User types</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Actions</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for user_type <- @user_types do %>
+    <tr>
+      <td><%= user_type.type %></td>
+      <td><%= user_type.actions %></td>
+
+      <td class="text-right">
+        <span><%= link "Show", to: user_type_path(@conn, :show, user_type), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Edit", to: user_type_path(@conn, :edit, user_type), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Delete", to: user_type_path(@conn, :delete, user_type), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New User type", to: user_type_path(@conn, :new) %></span>

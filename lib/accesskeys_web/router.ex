@@ -17,6 +17,9 @@ defmodule AccesskeysWeb.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    resources "/user_types", UserTypeController
+    resources "/access_keys", AccessKeyController
+    resources "/users", UserController
   end
 
   # Other scopes may use custom stacks.

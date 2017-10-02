@@ -1,0 +1,5 @@
+<h2>New Access key</h2>
+
+<%= render "form.html", Map.put(assigns, :action, access_key_path(@conn, :create)) %>
+
+<span><%= link "Back", to: access_key_path(@conn, :index) %></span>
