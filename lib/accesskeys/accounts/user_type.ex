@@ -1,12 +1,13 @@
 defmodule Accesskeys.Accounts.UserType do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Accesskeys.Accounts.UserType
+  alias Accesskeys.Accounts.{UserType,User}
 
 
   schema "user_types" do
     field :actions, {:array, :string}
     field :type, :string
+    has_many :user, User
 
     timestamps()
   end
