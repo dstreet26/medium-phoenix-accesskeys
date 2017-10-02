@@ -12,6 +12,16 @@
   </div>
 
   <div class="form-group">
+    <%= label f, :actions, class: "control-label" %>
+    <br>
+    <%= for valid_user_action <- @valid_user_actions do %>
+      <%= checkbox :checked_actions, "#{valid_user_action.action}", checked: valid_user_action.isChecked %> <%= "#{valid_user_action.action}" %> <br>
+    <%= end %>
+    
+    <%= error_tag f, :actions %>
+  </div>
+
+  <div class="form-group">
     <%= submit "Submit", class: "btn btn-primary" %>
   </div>
 <% end %>

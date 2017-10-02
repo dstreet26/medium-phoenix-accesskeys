@@ -8,6 +8,19 @@ defmodule Accesskeys.Accounts do
 
   alias Accesskeys.Accounts.UserType
 
+
+  def valid_user_actions do
+    ["can_make_thumbnails",
+      "can_add_users",
+      "can_delete_users",
+      "can_add_new_fields",
+      "can_modify_fields",
+      "can_view_high_res_image",
+      "can_comment"
+      ]
+  end
+
+
   @doc """
   Returns the list of user_types.
 
