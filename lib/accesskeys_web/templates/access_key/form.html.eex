@@ -6,10 +6,12 @@
   <% end %>
 
   <div class="form-group">
-    <%= label f, :access_key, class: "control-label" %>
-    <%= text_input f, :access_key, class: "form-control" %>
-    <%= error_tag f, :access_key %>
-  </div>
+    <%= inputs_for f, :user_type, fn utf -> %>
+      <%= label utf, :type, class: "control-label" %>
+      <%= select f, :type, @user_types|> Enum.map(&{&1.type, &1.id}) ,class: "form-control" %>
+      <%= error_tag utf, :type %>
+    <% end %>
+   </div>
 
   <div class="form-group">
     <%= submit "Submit", class: "btn btn-primary" %>

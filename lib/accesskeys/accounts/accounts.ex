@@ -128,6 +128,7 @@ defmodule Accesskeys.Accounts do
   """
   def list_access_keys do
     Repo.all(AccessKey)
+    |> Repo.preload(:user_type)
   end
 
   @doc """
@@ -144,7 +145,11 @@ defmodule Accesskeys.Accounts do
       ** (Ecto.NoResultsError)
 
   """
-  def get_access_key!(id), do: Repo.get!(AccessKey, id)
+  def get_access_key!(id), do: Repo.get!(AccessKey, id) |> Repo.preload(:user_type)
+
+  def check_access_key!(access_key) do
+    Repo.get_by(AccessKey, access_key: access_key)
+  end
 
   @doc """
   Creates a access_key.
@@ -158,9 +163,10 @@ defmodule Accesskeys.Accounts do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_access_key(attrs \\ %{}) do
+  def create_access_key(attrs \\ %{}, user_type_id) do
     %AccessKey{}
     |> AccessKey.changeset(attrs)
+    |> Ecto.Changeset.put_change(:user_type_id, user_type_id)
     |> Repo.insert()
   end
 

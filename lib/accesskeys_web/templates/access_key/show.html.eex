@@ -9,5 +9,4 @@
 
 </ul>
 
-<span><%= link "Edit", to: access_key_path(@conn, :edit, @access_key) %></span>
 <span><%= link "Back", to: access_key_path(@conn, :index) %></span>
