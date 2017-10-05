@@ -1,6 +1,6 @@
 # Accesskeys
 
-This project is from a blog post on Medium.
+This project is from a [blog post on Medium](https://medium.com/@davidstreeterconsulting/how-to-access-tokens-and-flexible-user-roles-in-phoenix-1-3-78c901df89d0).
 
 # Installation
 
